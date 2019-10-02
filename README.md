@@ -58,3 +58,4 @@ Name;lng;lat;lng
 - unfortunately the `start` and `end` date has to be manually given to the `pinControl.js`
 - there is an error in counting together-days if the displayed name is different but location is the same.
 - `default_after_location` is not an optimal solution
+- documentation
