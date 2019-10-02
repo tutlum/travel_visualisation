@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Distance Visualisation for two people</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <LINK href="animatePins_google.css" rel="stylesheet" type="text/css">
+    <META NAME="author" CONTENT="Sascha Schleef">	
+	<META NAME="description" CONTENT="Visualize a live together and apart">
+	
+   
+  </head>
+  <body>
+    <div id="map"></div>
+    
+    <div id='slider' >
+		<input class="butt" id="play" style="width:80px"  type="button" onclick="playpause();" value="Play">
+		<!--<div id="slidcont" class="slidcont" style="width:80%"></div>-->
+			
+			<canvas class="canvas" id='canvas' ></canvas>
+			<input class="slider"  id='slid' value="0" oninput="tick1(this.value);" onchange="tick1(this.value);" onclick="autostop=true;" type="range" name="points" min="0" max="60">
+		<a href="#" onclick="showhideControls();">.</a>
+		
+		<script>
+		function showhideControls(){
+			if (document.getElementById('controls').style.display==="none"){
+				//hide
+				document.getElementById('controls').style.display="block";
+				document.getElementById('slider').style.height="100px";
+				
+			}else{
+				//showall
+				document.getElementById('controls').style.display="none";
+				
+				document.getElementById('slider').style.height="70px";
+			}
+		}
+		</script>
+        
+        <!--<script>
+			var canvas = document.getElementById("canvas");
+			var context = canvas.getContext("2d");
+			context.fillStyle = "#00000000";
+			context.fillRect(0, 0, canvas.width, canvas.height);
+			for (var i=0;i<canvas.width;i++){
+				context.fillStyle = "rgba(255,0,0,"+(canvas.width-i/2)*1/canvas.width+")";
+				context.fillRect(i, 0, 1, canvas.height);
+			}
+		</script>-->
+		
+        <br><br>
+        <div id="controls" style="display:block;">
+			Locations: <input style="max-width:200px"  type="file" id="filesOrte" name="files[]" multiple /><span id="orteVal"></span>
+			GREEN: <input  style="max-width:200px"  type="file" id="filesM1" name="files[]" multiple /><span id="dataValM1"></span>
+			BLUE: <input  style="max-width:200px"  type="file" id="filesM2" name="files[]" multiple /><span id="dataValM2"></span>
+			fast(tick/d): <input style="max-width:50px"  onchange="fastDayRate=1.0/this.value" type="number" id="fastTick" name="fastTick" value="1"/>
+			slow(tick/d): <input style="max-width:50px" onchange="slowDayRate=1.0/this.value" type="number" id="slowTick" name="slowTick"  value="4"/>
+			travel(ticks): <input style="max-width:50px" onchange="defStepsForFly=this.value"  type="number" id="travelSteps" name="travelSteps"  value="15"/>
+			<input class="butt" id="butt" type="button" onclick="generatePath();" id="generate" value="generate Data"><span id="genPaths"></span>
+			speed(tick/s): <input style="max-width:50px" onchange="ticksPerSecond=this.value" type="number" id="speed" name="speed"  value="30"/>
+			<!--<input class="butt" id="butt" type="button" onclick="testing();" id="generate" value="test">
+			<div id="style-selector-control" style="margin:10px;" class="map-control">-->
+			View:  <select id="style-selector" class="selector-control" value="silver_style">
+				<option value="default">Default</option>
+				<option value="silver_style">Silver Style</option>
+				<!--<option value="feel" selected="selected">Feelspace</option>-->
+			  </select>
+			  Rese<a href="#" onlick="reset();">t</a>
+			<!--</div>-->
+        </div>
+    </div>
+    <div id="title">
+		<div style="width: 53%;background-color: #fff0f090; border-radius: 10px; padding: 10px; padding-top:5px; margin-left: auto ; margin-right: auto ;">
+		</b><span id="title_orig"  style="font-size:25px"><b>TITLE - </span>
+		<span id="title_trans"  style="font-size:25px"><b>SUBTITLE</span></b>
+		</div>
+    </div>
+    <div id="floating-panel" >
+	  <!--Datum: --><b><span style="font-size:55px"id="date">01.01.2011</span></b><br>
+      Distanz: <br><b><span style="font-size:45px" id="distance">0</span> km</b><br>
+      zusammen / juntos: <br><b><span style="font-size:45px" id="together">0</span>/<span style="font-size:45px" id="totaltogether">0</span> d</b><br>
+      <span id="name1">GREEN</span>: <br><b><span style="font-size:45px" id="marker1"></span></b><br>
+      <span id="name2">BLUE</span>: <br><b><span style="font-size:45px" id="marker2"></span></b><br>
+    </div>
+    
+    <script src="img/silver_style.js"></script>
+    <script src="date.js"></script>
+    <script src="pinControl.js"></script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=__APIKEY__&libraries=geometry&callback=initMap" async defer></script>
+  </body>
+</html>
