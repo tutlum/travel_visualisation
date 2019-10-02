@@ -32,6 +32,7 @@ You need to manually generate your data into the three given files.
 
 #### Personal travel file (GREEN.csv, BLUE.csv)
 For each of the two people there has to be .csv file separeted by semicola and containing the following data:
+
 | Field                   | Description  |
 |:----------------------- |:------------ |
 | `destination_name`      | Name of the destination |
@@ -45,6 +46,7 @@ For each of the two people there has to be .csv file separeted by semicola and c
 #### Locations file
 In this file a list of all destinations and their locations can be given to shorten the personal travel file:
 Name;lng;lat;lng
+
 | Field                  | Description  |
 |:---------------------- |:------------ |
 | `destination_name`     | Name of the destination |
